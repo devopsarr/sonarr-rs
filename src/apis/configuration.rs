@@ -40,7 +40,7 @@ impl Default for Configuration {
     fn default() -> Self {
         Configuration {
             base_path: "http://localhost:8989".to_owned(),
-            user_agent: Some("sonarr-rs/v0.0.1".to_owned()), // x-release-please-version
+            user_agent: Some("sonarr-rs/v0.1.0".to_owned()), // x-release-please-version
             client: reqwest::Client::new(),
             basic_auth: None,
             oauth_access_token: None,
