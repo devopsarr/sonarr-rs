@@ -25,7 +25,7 @@ pub enum CreateSeasonPassError {
 
 pub async fn create_season_pass(configuration: &configuration::Configuration, season_pass_resource: Option<models::SeasonPassResource>) -> Result<(), Error<CreateSeasonPassError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_season_pass_resource = season_pass_resource;
+    let p_body_season_pass_resource = season_pass_resource;
 
     let uri_str = format!("{}/api/v3/seasonpass", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
@@ -49,7 +49,7 @@ pub async fn create_season_pass(configuration: &configuration::Configuration, se
         };
         req_builder = req_builder.header("X-Api-Key", value);
     };
-    req_builder = req_builder.json(&p_season_pass_resource);
+    req_builder = req_builder.json(&p_body_season_pass_resource);
 
     let req = req_builder.build()?;
     let resp = configuration.client.execute(req).await?;

@@ -96,9 +96,9 @@ pub async fn get_naming_config(configuration: &configuration::Configuration, ) -
 
 pub async fn get_naming_config_by_id(configuration: &configuration::Configuration, id: i32) -> Result<models::NamingConfigResource, Error<GetNamingConfigByIdError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_id = id;
+    let p_path_id = id;
 
-    let uri_str = format!("{}/api/v3/config/naming/{id}", configuration.base_path, id=p_id);
+    let uri_str = format!("{}/api/v3/config/naming/{id}", configuration.base_path, id=p_path_id);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
     if let Some(ref apikey) = configuration.api_key {
@@ -148,60 +148,60 @@ pub async fn get_naming_config_by_id(configuration: &configuration::Configuratio
 
 pub async fn get_naming_config_examples(configuration: &configuration::Configuration, rename_episodes: Option<bool>, replace_illegal_characters: Option<bool>, colon_replacement_format: Option<i32>, custom_colon_replacement_format: Option<&str>, multi_episode_style: Option<i32>, standard_episode_format: Option<&str>, daily_episode_format: Option<&str>, anime_episode_format: Option<&str>, series_folder_format: Option<&str>, season_folder_format: Option<&str>, specials_folder_format: Option<&str>, id: Option<i32>, resource_name: Option<&str>) -> Result<(), Error<GetNamingConfigExamplesError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_rename_episodes = rename_episodes;
-    let p_replace_illegal_characters = replace_illegal_characters;
-    let p_colon_replacement_format = colon_replacement_format;
-    let p_custom_colon_replacement_format = custom_colon_replacement_format;
-    let p_multi_episode_style = multi_episode_style;
-    let p_standard_episode_format = standard_episode_format;
-    let p_daily_episode_format = daily_episode_format;
-    let p_anime_episode_format = anime_episode_format;
-    let p_series_folder_format = series_folder_format;
-    let p_season_folder_format = season_folder_format;
-    let p_specials_folder_format = specials_folder_format;
-    let p_id = id;
-    let p_resource_name = resource_name;
+    let p_query_rename_episodes = rename_episodes;
+    let p_query_replace_illegal_characters = replace_illegal_characters;
+    let p_query_colon_replacement_format = colon_replacement_format;
+    let p_query_custom_colon_replacement_format = custom_colon_replacement_format;
+    let p_query_multi_episode_style = multi_episode_style;
+    let p_query_standard_episode_format = standard_episode_format;
+    let p_query_daily_episode_format = daily_episode_format;
+    let p_query_anime_episode_format = anime_episode_format;
+    let p_query_series_folder_format = series_folder_format;
+    let p_query_season_folder_format = season_folder_format;
+    let p_query_specials_folder_format = specials_folder_format;
+    let p_query_id = id;
+    let p_query_resource_name = resource_name;
 
     let uri_str = format!("{}/api/v3/config/naming/examples", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
-    if let Some(ref param_value) = p_rename_episodes {
+    if let Some(ref param_value) = p_query_rename_episodes {
         req_builder = req_builder.query(&[("renameEpisodes", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_replace_illegal_characters {
+    if let Some(ref param_value) = p_query_replace_illegal_characters {
         req_builder = req_builder.query(&[("replaceIllegalCharacters", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_colon_replacement_format {
+    if let Some(ref param_value) = p_query_colon_replacement_format {
         req_builder = req_builder.query(&[("colonReplacementFormat", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_custom_colon_replacement_format {
+    if let Some(ref param_value) = p_query_custom_colon_replacement_format {
         req_builder = req_builder.query(&[("customColonReplacementFormat", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_multi_episode_style {
+    if let Some(ref param_value) = p_query_multi_episode_style {
         req_builder = req_builder.query(&[("multiEpisodeStyle", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_standard_episode_format {
+    if let Some(ref param_value) = p_query_standard_episode_format {
         req_builder = req_builder.query(&[("standardEpisodeFormat", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_daily_episode_format {
+    if let Some(ref param_value) = p_query_daily_episode_format {
         req_builder = req_builder.query(&[("dailyEpisodeFormat", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_anime_episode_format {
+    if let Some(ref param_value) = p_query_anime_episode_format {
         req_builder = req_builder.query(&[("animeEpisodeFormat", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_series_folder_format {
+    if let Some(ref param_value) = p_query_series_folder_format {
         req_builder = req_builder.query(&[("seriesFolderFormat", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_season_folder_format {
+    if let Some(ref param_value) = p_query_season_folder_format {
         req_builder = req_builder.query(&[("seasonFolderFormat", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_specials_folder_format {
+    if let Some(ref param_value) = p_query_specials_folder_format {
         req_builder = req_builder.query(&[("specialsFolderFormat", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_id {
+    if let Some(ref param_value) = p_query_id {
         req_builder = req_builder.query(&[("id", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_resource_name {
+    if let Some(ref param_value) = p_query_resource_name {
         req_builder = req_builder.query(&[("resourceName", &param_value.to_string())]);
     }
     if let Some(ref apikey) = configuration.api_key {
@@ -240,10 +240,10 @@ pub async fn get_naming_config_examples(configuration: &configuration::Configura
 
 pub async fn update_naming_config(configuration: &configuration::Configuration, id: &str, naming_config_resource: Option<models::NamingConfigResource>) -> Result<models::NamingConfigResource, Error<UpdateNamingConfigError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_id = id;
-    let p_naming_config_resource = naming_config_resource;
+    let p_path_id = id;
+    let p_body_naming_config_resource = naming_config_resource;
 
-    let uri_str = format!("{}/api/v3/config/naming/{id}", configuration.base_path, id=crate::apis::urlencode(p_id));
+    let uri_str = format!("{}/api/v3/config/naming/{id}", configuration.base_path, id=crate::apis::urlencode(p_path_id));
     let mut req_builder = configuration.client.request(reqwest::Method::PUT, &uri_str);
 
     if let Some(ref apikey) = configuration.api_key {
@@ -265,7 +265,7 @@ pub async fn update_naming_config(configuration: &configuration::Configuration, 
         };
         req_builder = req_builder.header("X-Api-Key", value);
     };
-    req_builder = req_builder.json(&p_naming_config_resource);
+    req_builder = req_builder.json(&p_body_naming_config_resource);
 
     let req = req_builder.build()?;
     let resp = configuration.client.execute(req).await?;

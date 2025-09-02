@@ -25,7 +25,7 @@ pub enum CreateSeriesImportError {
 
 pub async fn create_series_import(configuration: &configuration::Configuration, series_resource: Option<Vec<models::SeriesResource>>) -> Result<(), Error<CreateSeriesImportError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_series_resource = series_resource;
+    let p_body_series_resource = series_resource;
 
     let uri_str = format!("{}/api/v3/series/import", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
@@ -49,7 +49,7 @@ pub async fn create_series_import(configuration: &configuration::Configuration, 
         };
         req_builder = req_builder.header("X-Api-Key", value);
     };
-    req_builder = req_builder.json(&p_series_resource);
+    req_builder = req_builder.json(&p_body_series_resource);
 
     let req = req_builder.build()?;
     let resp = configuration.client.execute(req).await?;

@@ -25,9 +25,9 @@ pub enum GetSeriesFolderError {
 
 pub async fn get_series_folder(configuration: &configuration::Configuration, id: i32) -> Result<(), Error<GetSeriesFolderError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_id = id;
+    let p_path_id = id;
 
-    let uri_str = format!("{}/api/v3/series/{id}/folder", configuration.base_path, id=p_id);
+    let uri_str = format!("{}/api/v3/series/{id}/folder", configuration.base_path, id=p_path_id);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
     if let Some(ref apikey) = configuration.api_key {

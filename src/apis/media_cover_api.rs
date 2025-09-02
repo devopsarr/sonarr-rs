@@ -25,10 +25,10 @@ pub enum GetMediaCoverByFilenameError {
 
 pub async fn get_media_cover_by_filename(configuration: &configuration::Configuration, series_id: i32, filename: &str) -> Result<(), Error<GetMediaCoverByFilenameError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_series_id = series_id;
-    let p_filename = filename;
+    let p_path_series_id = series_id;
+    let p_path_filename = filename;
 
-    let uri_str = format!("{}/api/v3/mediacover/{seriesId}/{filename}", configuration.base_path, seriesId=p_series_id, filename=crate::apis::urlencode(p_filename));
+    let uri_str = format!("{}/api/v3/mediacover/{seriesId}/{filename}", configuration.base_path, seriesId=p_path_series_id, filename=crate::apis::urlencode(p_path_filename));
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
     if let Some(ref apikey) = configuration.api_key {

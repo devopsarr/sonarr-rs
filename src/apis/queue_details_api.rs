@@ -25,27 +25,27 @@ pub enum ListQueueDetailsError {
 
 pub async fn list_queue_details(configuration: &configuration::Configuration, series_id: Option<i32>, episode_ids: Option<Vec<i32>>, include_series: Option<bool>, include_episode: Option<bool>) -> Result<Vec<models::QueueResource>, Error<ListQueueDetailsError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_series_id = series_id;
-    let p_episode_ids = episode_ids;
-    let p_include_series = include_series;
-    let p_include_episode = include_episode;
+    let p_query_series_id = series_id;
+    let p_query_episode_ids = episode_ids;
+    let p_query_include_series = include_series;
+    let p_query_include_episode = include_episode;
 
     let uri_str = format!("{}/api/v3/queue/details", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
-    if let Some(ref param_value) = p_series_id {
+    if let Some(ref param_value) = p_query_series_id {
         req_builder = req_builder.query(&[("seriesId", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_episode_ids {
+    if let Some(ref param_value) = p_query_episode_ids {
         req_builder = match "multi" {
             "multi" => req_builder.query(&param_value.into_iter().map(|p| ("episodeIds".to_owned(), p.to_string())).collect::<Vec<(std::string::String, std::string::String)>>()),
             _ => req_builder.query(&[("episodeIds", &param_value.into_iter().map(|p| p.to_string()).collect::<Vec<String>>().join(",").to_string())]),
         };
     }
-    if let Some(ref param_value) = p_include_series {
+    if let Some(ref param_value) = p_query_include_series {
         req_builder = req_builder.query(&[("includeSeries", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_include_episode {
+    if let Some(ref param_value) = p_query_include_episode {
         req_builder = req_builder.query(&[("includeEpisode", &param_value.to_string())]);
     }
     if let Some(ref apikey) = configuration.api_key {

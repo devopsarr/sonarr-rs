@@ -46,9 +46,9 @@ pub enum UpdateEpisodeError {
 
 pub async fn get_episode_by_id(configuration: &configuration::Configuration, id: i32) -> Result<models::EpisodeResource, Error<GetEpisodeByIdError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_id = id;
+    let p_path_id = id;
 
-    let uri_str = format!("{}/api/v3/episode/{id}", configuration.base_path, id=p_id);
+    let uri_str = format!("{}/api/v3/episode/{id}", configuration.base_path, id=p_path_id);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
     if let Some(ref apikey) = configuration.api_key {
@@ -98,39 +98,39 @@ pub async fn get_episode_by_id(configuration: &configuration::Configuration, id:
 
 pub async fn list_episode(configuration: &configuration::Configuration, series_id: Option<i32>, season_number: Option<i32>, episode_ids: Option<Vec<i32>>, episode_file_id: Option<i32>, include_series: Option<bool>, include_episode_file: Option<bool>, include_images: Option<bool>) -> Result<Vec<models::EpisodeResource>, Error<ListEpisodeError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_series_id = series_id;
-    let p_season_number = season_number;
-    let p_episode_ids = episode_ids;
-    let p_episode_file_id = episode_file_id;
-    let p_include_series = include_series;
-    let p_include_episode_file = include_episode_file;
-    let p_include_images = include_images;
+    let p_query_series_id = series_id;
+    let p_query_season_number = season_number;
+    let p_query_episode_ids = episode_ids;
+    let p_query_episode_file_id = episode_file_id;
+    let p_query_include_series = include_series;
+    let p_query_include_episode_file = include_episode_file;
+    let p_query_include_images = include_images;
 
     let uri_str = format!("{}/api/v3/episode", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
-    if let Some(ref param_value) = p_series_id {
+    if let Some(ref param_value) = p_query_series_id {
         req_builder = req_builder.query(&[("seriesId", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_season_number {
+    if let Some(ref param_value) = p_query_season_number {
         req_builder = req_builder.query(&[("seasonNumber", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_episode_ids {
+    if let Some(ref param_value) = p_query_episode_ids {
         req_builder = match "multi" {
             "multi" => req_builder.query(&param_value.into_iter().map(|p| ("episodeIds".to_owned(), p.to_string())).collect::<Vec<(std::string::String, std::string::String)>>()),
             _ => req_builder.query(&[("episodeIds", &param_value.into_iter().map(|p| p.to_string()).collect::<Vec<String>>().join(",").to_string())]),
         };
     }
-    if let Some(ref param_value) = p_episode_file_id {
+    if let Some(ref param_value) = p_query_episode_file_id {
         req_builder = req_builder.query(&[("episodeFileId", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_include_series {
+    if let Some(ref param_value) = p_query_include_series {
         req_builder = req_builder.query(&[("includeSeries", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_include_episode_file {
+    if let Some(ref param_value) = p_query_include_episode_file {
         req_builder = req_builder.query(&[("includeEpisodeFile", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_include_images {
+    if let Some(ref param_value) = p_query_include_images {
         req_builder = req_builder.query(&[("includeImages", &param_value.to_string())]);
     }
     if let Some(ref apikey) = configuration.api_key {
@@ -180,13 +180,13 @@ pub async fn list_episode(configuration: &configuration::Configuration, series_i
 
 pub async fn put_episode_monitor(configuration: &configuration::Configuration, include_images: Option<bool>, episodes_monitored_resource: Option<models::EpisodesMonitoredResource>) -> Result<(), Error<PutEpisodeMonitorError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_include_images = include_images;
-    let p_episodes_monitored_resource = episodes_monitored_resource;
+    let p_query_include_images = include_images;
+    let p_body_episodes_monitored_resource = episodes_monitored_resource;
 
     let uri_str = format!("{}/api/v3/episode/monitor", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::PUT, &uri_str);
 
-    if let Some(ref param_value) = p_include_images {
+    if let Some(ref param_value) = p_query_include_images {
         req_builder = req_builder.query(&[("includeImages", &param_value.to_string())]);
     }
     if let Some(ref apikey) = configuration.api_key {
@@ -208,7 +208,7 @@ pub async fn put_episode_monitor(configuration: &configuration::Configuration, i
         };
         req_builder = req_builder.header("X-Api-Key", value);
     };
-    req_builder = req_builder.json(&p_episodes_monitored_resource);
+    req_builder = req_builder.json(&p_body_episodes_monitored_resource);
 
     let req = req_builder.build()?;
     let resp = configuration.client.execute(req).await?;
@@ -226,10 +226,10 @@ pub async fn put_episode_monitor(configuration: &configuration::Configuration, i
 
 pub async fn update_episode(configuration: &configuration::Configuration, id: i32, episode_resource: Option<models::EpisodeResource>) -> Result<models::EpisodeResource, Error<UpdateEpisodeError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_id = id;
-    let p_episode_resource = episode_resource;
+    let p_path_id = id;
+    let p_body_episode_resource = episode_resource;
 
-    let uri_str = format!("{}/api/v3/episode/{id}", configuration.base_path, id=p_id);
+    let uri_str = format!("{}/api/v3/episode/{id}", configuration.base_path, id=p_path_id);
     let mut req_builder = configuration.client.request(reqwest::Method::PUT, &uri_str);
 
     if let Some(ref apikey) = configuration.api_key {
@@ -251,7 +251,7 @@ pub async fn update_episode(configuration: &configuration::Configuration, id: i3
         };
         req_builder = req_builder.header("X-Api-Key", value);
     };
-    req_builder = req_builder.json(&p_episode_resource);
+    req_builder = req_builder.json(&p_body_episode_resource);
 
     let req = req_builder.build()?;
     let resp = configuration.client.execute(req).await?;
