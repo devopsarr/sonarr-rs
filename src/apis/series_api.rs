@@ -53,7 +53,7 @@ pub enum UpdateSeriesError {
 
 pub async fn create_series(configuration: &configuration::Configuration, series_resource: Option<models::SeriesResource>) -> Result<models::SeriesResource, Error<CreateSeriesError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_series_resource = series_resource;
+    let p_body_series_resource = series_resource;
 
     let uri_str = format!("{}/api/v3/series", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
@@ -77,7 +77,7 @@ pub async fn create_series(configuration: &configuration::Configuration, series_
         };
         req_builder = req_builder.header("X-Api-Key", value);
     };
-    req_builder = req_builder.json(&p_series_resource);
+    req_builder = req_builder.json(&p_body_series_resource);
 
     let req = req_builder.build()?;
     let resp = configuration.client.execute(req).await?;
@@ -106,17 +106,17 @@ pub async fn create_series(configuration: &configuration::Configuration, series_
 
 pub async fn delete_series(configuration: &configuration::Configuration, id: i32, delete_files: Option<bool>, add_import_list_exclusion: Option<bool>) -> Result<(), Error<DeleteSeriesError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_id = id;
-    let p_delete_files = delete_files;
-    let p_add_import_list_exclusion = add_import_list_exclusion;
+    let p_path_id = id;
+    let p_query_delete_files = delete_files;
+    let p_query_add_import_list_exclusion = add_import_list_exclusion;
 
-    let uri_str = format!("{}/api/v3/series/{id}", configuration.base_path, id=p_id);
+    let uri_str = format!("{}/api/v3/series/{id}", configuration.base_path, id=p_path_id);
     let mut req_builder = configuration.client.request(reqwest::Method::DELETE, &uri_str);
 
-    if let Some(ref param_value) = p_delete_files {
+    if let Some(ref param_value) = p_query_delete_files {
         req_builder = req_builder.query(&[("deleteFiles", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_add_import_list_exclusion {
+    if let Some(ref param_value) = p_query_add_import_list_exclusion {
         req_builder = req_builder.query(&[("addImportListExclusion", &param_value.to_string())]);
     }
     if let Some(ref apikey) = configuration.api_key {
@@ -155,13 +155,13 @@ pub async fn delete_series(configuration: &configuration::Configuration, id: i32
 
 pub async fn get_series_by_id(configuration: &configuration::Configuration, id: i32, include_season_images: Option<bool>) -> Result<models::SeriesResource, Error<GetSeriesByIdError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_id = id;
-    let p_include_season_images = include_season_images;
+    let p_path_id = id;
+    let p_query_include_season_images = include_season_images;
 
-    let uri_str = format!("{}/api/v3/series/{id}", configuration.base_path, id=p_id);
+    let uri_str = format!("{}/api/v3/series/{id}", configuration.base_path, id=p_path_id);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
-    if let Some(ref param_value) = p_include_season_images {
+    if let Some(ref param_value) = p_query_include_season_images {
         req_builder = req_builder.query(&[("includeSeasonImages", &param_value.to_string())]);
     }
     if let Some(ref apikey) = configuration.api_key {
@@ -211,16 +211,16 @@ pub async fn get_series_by_id(configuration: &configuration::Configuration, id: 
 
 pub async fn list_series(configuration: &configuration::Configuration, tvdb_id: Option<i32>, include_season_images: Option<bool>) -> Result<Vec<models::SeriesResource>, Error<ListSeriesError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_tvdb_id = tvdb_id;
-    let p_include_season_images = include_season_images;
+    let p_query_tvdb_id = tvdb_id;
+    let p_query_include_season_images = include_season_images;
 
     let uri_str = format!("{}/api/v3/series", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
-    if let Some(ref param_value) = p_tvdb_id {
+    if let Some(ref param_value) = p_query_tvdb_id {
         req_builder = req_builder.query(&[("tvdbId", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_include_season_images {
+    if let Some(ref param_value) = p_query_include_season_images {
         req_builder = req_builder.query(&[("includeSeasonImages", &param_value.to_string())]);
     }
     if let Some(ref apikey) = configuration.api_key {
@@ -270,14 +270,14 @@ pub async fn list_series(configuration: &configuration::Configuration, tvdb_id: 
 
 pub async fn update_series(configuration: &configuration::Configuration, id: &str, move_files: Option<bool>, series_resource: Option<models::SeriesResource>) -> Result<models::SeriesResource, Error<UpdateSeriesError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_id = id;
-    let p_move_files = move_files;
-    let p_series_resource = series_resource;
+    let p_path_id = id;
+    let p_query_move_files = move_files;
+    let p_body_series_resource = series_resource;
 
-    let uri_str = format!("{}/api/v3/series/{id}", configuration.base_path, id=crate::apis::urlencode(p_id));
+    let uri_str = format!("{}/api/v3/series/{id}", configuration.base_path, id=crate::apis::urlencode(p_path_id));
     let mut req_builder = configuration.client.request(reqwest::Method::PUT, &uri_str);
 
-    if let Some(ref param_value) = p_move_files {
+    if let Some(ref param_value) = p_query_move_files {
         req_builder = req_builder.query(&[("moveFiles", &param_value.to_string())]);
     }
     if let Some(ref apikey) = configuration.api_key {
@@ -299,7 +299,7 @@ pub async fn update_series(configuration: &configuration::Configuration, id: &st
         };
         req_builder = req_builder.header("X-Api-Key", value);
     };
-    req_builder = req_builder.json(&p_series_resource);
+    req_builder = req_builder.json(&p_body_series_resource);
 
     let req = req_builder.build()?;
     let resp = configuration.client.execute(req).await?;

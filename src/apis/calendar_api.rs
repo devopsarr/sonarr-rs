@@ -32,9 +32,9 @@ pub enum ListCalendarError {
 
 pub async fn get_calendar_by_id(configuration: &configuration::Configuration, id: i32) -> Result<models::EpisodeResource, Error<GetCalendarByIdError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_id = id;
+    let p_path_id = id;
 
-    let uri_str = format!("{}/api/v3/calendar/{id}", configuration.base_path, id=p_id);
+    let uri_str = format!("{}/api/v3/calendar/{id}", configuration.base_path, id=p_path_id);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
     if let Some(ref apikey) = configuration.api_key {
@@ -84,36 +84,36 @@ pub async fn get_calendar_by_id(configuration: &configuration::Configuration, id
 
 pub async fn list_calendar(configuration: &configuration::Configuration, start: Option<String>, end: Option<String>, unmonitored: Option<bool>, include_series: Option<bool>, include_episode_file: Option<bool>, include_episode_images: Option<bool>, tags: Option<&str>) -> Result<Vec<models::EpisodeResource>, Error<ListCalendarError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_start = start;
-    let p_end = end;
-    let p_unmonitored = unmonitored;
-    let p_include_series = include_series;
-    let p_include_episode_file = include_episode_file;
-    let p_include_episode_images = include_episode_images;
-    let p_tags = tags;
+    let p_query_start = start;
+    let p_query_end = end;
+    let p_query_unmonitored = unmonitored;
+    let p_query_include_series = include_series;
+    let p_query_include_episode_file = include_episode_file;
+    let p_query_include_episode_images = include_episode_images;
+    let p_query_tags = tags;
 
     let uri_str = format!("{}/api/v3/calendar", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
-    if let Some(ref param_value) = p_start {
+    if let Some(ref param_value) = p_query_start {
         req_builder = req_builder.query(&[("start", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_end {
+    if let Some(ref param_value) = p_query_end {
         req_builder = req_builder.query(&[("end", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_unmonitored {
+    if let Some(ref param_value) = p_query_unmonitored {
         req_builder = req_builder.query(&[("unmonitored", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_include_series {
+    if let Some(ref param_value) = p_query_include_series {
         req_builder = req_builder.query(&[("includeSeries", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_include_episode_file {
+    if let Some(ref param_value) = p_query_include_episode_file {
         req_builder = req_builder.query(&[("includeEpisodeFile", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_include_episode_images {
+    if let Some(ref param_value) = p_query_include_episode_images {
         req_builder = req_builder.query(&[("includeEpisodeImages", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_tags {
+    if let Some(ref param_value) = p_query_tags {
         req_builder = req_builder.query(&[("tags", &param_value.to_string())]);
     }
     if let Some(ref apikey) = configuration.api_key {

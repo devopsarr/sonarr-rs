@@ -67,9 +67,9 @@ pub enum UpdateEpisodeFileError {
 
 pub async fn delete_episode_file(configuration: &configuration::Configuration, id: i32) -> Result<(), Error<DeleteEpisodeFileError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_id = id;
+    let p_path_id = id;
 
-    let uri_str = format!("{}/api/v3/episodefile/{id}", configuration.base_path, id=p_id);
+    let uri_str = format!("{}/api/v3/episodefile/{id}", configuration.base_path, id=p_path_id);
     let mut req_builder = configuration.client.request(reqwest::Method::DELETE, &uri_str);
 
     if let Some(ref apikey) = configuration.api_key {
@@ -108,7 +108,7 @@ pub async fn delete_episode_file(configuration: &configuration::Configuration, i
 
 pub async fn delete_episode_file_bulk(configuration: &configuration::Configuration, episode_file_list_resource: Option<models::EpisodeFileListResource>) -> Result<(), Error<DeleteEpisodeFileBulkError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_episode_file_list_resource = episode_file_list_resource;
+    let p_body_episode_file_list_resource = episode_file_list_resource;
 
     let uri_str = format!("{}/api/v3/episodefile/bulk", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::DELETE, &uri_str);
@@ -132,7 +132,7 @@ pub async fn delete_episode_file_bulk(configuration: &configuration::Configurati
         };
         req_builder = req_builder.header("X-Api-Key", value);
     };
-    req_builder = req_builder.json(&p_episode_file_list_resource);
+    req_builder = req_builder.json(&p_body_episode_file_list_resource);
 
     let req = req_builder.build()?;
     let resp = configuration.client.execute(req).await?;
@@ -150,9 +150,9 @@ pub async fn delete_episode_file_bulk(configuration: &configuration::Configurati
 
 pub async fn get_episode_file_by_id(configuration: &configuration::Configuration, id: i32) -> Result<models::EpisodeFileResource, Error<GetEpisodeFileByIdError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_id = id;
+    let p_path_id = id;
 
-    let uri_str = format!("{}/api/v3/episodefile/{id}", configuration.base_path, id=p_id);
+    let uri_str = format!("{}/api/v3/episodefile/{id}", configuration.base_path, id=p_path_id);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
     if let Some(ref apikey) = configuration.api_key {
@@ -202,16 +202,16 @@ pub async fn get_episode_file_by_id(configuration: &configuration::Configuration
 
 pub async fn list_episode_file(configuration: &configuration::Configuration, series_id: Option<i32>, episode_file_ids: Option<Vec<i32>>) -> Result<Vec<models::EpisodeFileResource>, Error<ListEpisodeFileError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_series_id = series_id;
-    let p_episode_file_ids = episode_file_ids;
+    let p_query_series_id = series_id;
+    let p_query_episode_file_ids = episode_file_ids;
 
     let uri_str = format!("{}/api/v3/episodefile", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
-    if let Some(ref param_value) = p_series_id {
+    if let Some(ref param_value) = p_query_series_id {
         req_builder = req_builder.query(&[("seriesId", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_episode_file_ids {
+    if let Some(ref param_value) = p_query_episode_file_ids {
         req_builder = match "multi" {
             "multi" => req_builder.query(&param_value.into_iter().map(|p| ("episodeFileIds".to_owned(), p.to_string())).collect::<Vec<(std::string::String, std::string::String)>>()),
             _ => req_builder.query(&[("episodeFileIds", &param_value.into_iter().map(|p| p.to_string()).collect::<Vec<String>>().join(",").to_string())]),
@@ -264,7 +264,7 @@ pub async fn list_episode_file(configuration: &configuration::Configuration, ser
 
 pub async fn put_episode_file_bulk(configuration: &configuration::Configuration, episode_file_resource: Option<Vec<models::EpisodeFileResource>>) -> Result<(), Error<PutEpisodeFileBulkError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_episode_file_resource = episode_file_resource;
+    let p_body_episode_file_resource = episode_file_resource;
 
     let uri_str = format!("{}/api/v3/episodefile/bulk", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::PUT, &uri_str);
@@ -288,7 +288,7 @@ pub async fn put_episode_file_bulk(configuration: &configuration::Configuration,
         };
         req_builder = req_builder.header("X-Api-Key", value);
     };
-    req_builder = req_builder.json(&p_episode_file_resource);
+    req_builder = req_builder.json(&p_body_episode_file_resource);
 
     let req = req_builder.build()?;
     let resp = configuration.client.execute(req).await?;
@@ -306,7 +306,7 @@ pub async fn put_episode_file_bulk(configuration: &configuration::Configuration,
 
 pub async fn put_episode_file_editor(configuration: &configuration::Configuration, episode_file_list_resource: Option<models::EpisodeFileListResource>) -> Result<(), Error<PutEpisodeFileEditorError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_episode_file_list_resource = episode_file_list_resource;
+    let p_body_episode_file_list_resource = episode_file_list_resource;
 
     let uri_str = format!("{}/api/v3/episodefile/editor", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::PUT, &uri_str);
@@ -330,7 +330,7 @@ pub async fn put_episode_file_editor(configuration: &configuration::Configuratio
         };
         req_builder = req_builder.header("X-Api-Key", value);
     };
-    req_builder = req_builder.json(&p_episode_file_list_resource);
+    req_builder = req_builder.json(&p_body_episode_file_list_resource);
 
     let req = req_builder.build()?;
     let resp = configuration.client.execute(req).await?;
@@ -348,10 +348,10 @@ pub async fn put_episode_file_editor(configuration: &configuration::Configuratio
 
 pub async fn update_episode_file(configuration: &configuration::Configuration, id: &str, episode_file_resource: Option<models::EpisodeFileResource>) -> Result<models::EpisodeFileResource, Error<UpdateEpisodeFileError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_id = id;
-    let p_episode_file_resource = episode_file_resource;
+    let p_path_id = id;
+    let p_body_episode_file_resource = episode_file_resource;
 
-    let uri_str = format!("{}/api/v3/episodefile/{id}", configuration.base_path, id=crate::apis::urlencode(p_id));
+    let uri_str = format!("{}/api/v3/episodefile/{id}", configuration.base_path, id=crate::apis::urlencode(p_path_id));
     let mut req_builder = configuration.client.request(reqwest::Method::PUT, &uri_str);
 
     if let Some(ref apikey) = configuration.api_key {
@@ -373,7 +373,7 @@ pub async fn update_episode_file(configuration: &configuration::Configuration, i
         };
         req_builder = req_builder.header("X-Api-Key", value);
     };
-    req_builder = req_builder.json(&p_episode_file_resource);
+    req_builder = req_builder.json(&p_body_episode_file_resource);
 
     let req = req_builder.build()?;
     let resp = configuration.client.execute(req).await?;

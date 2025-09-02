@@ -32,40 +32,40 @@ pub enum GetWantedCutoffByIdError {
 
 pub async fn get_wanted_cutoff(configuration: &configuration::Configuration, page: Option<i32>, page_size: Option<i32>, sort_key: Option<&str>, sort_direction: Option<models::SortDirection>, include_series: Option<bool>, include_episode_file: Option<bool>, include_images: Option<bool>, monitored: Option<bool>) -> Result<models::EpisodeResourcePagingResource, Error<GetWantedCutoffError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_page = page;
-    let p_page_size = page_size;
-    let p_sort_key = sort_key;
-    let p_sort_direction = sort_direction;
-    let p_include_series = include_series;
-    let p_include_episode_file = include_episode_file;
-    let p_include_images = include_images;
-    let p_monitored = monitored;
+    let p_query_page = page;
+    let p_query_page_size = page_size;
+    let p_query_sort_key = sort_key;
+    let p_query_sort_direction = sort_direction;
+    let p_query_include_series = include_series;
+    let p_query_include_episode_file = include_episode_file;
+    let p_query_include_images = include_images;
+    let p_query_monitored = monitored;
 
     let uri_str = format!("{}/api/v3/wanted/cutoff", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
-    if let Some(ref param_value) = p_page {
+    if let Some(ref param_value) = p_query_page {
         req_builder = req_builder.query(&[("page", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_page_size {
+    if let Some(ref param_value) = p_query_page_size {
         req_builder = req_builder.query(&[("pageSize", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_sort_key {
+    if let Some(ref param_value) = p_query_sort_key {
         req_builder = req_builder.query(&[("sortKey", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_sort_direction {
+    if let Some(ref param_value) = p_query_sort_direction {
         req_builder = req_builder.query(&[("sortDirection", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_include_series {
+    if let Some(ref param_value) = p_query_include_series {
         req_builder = req_builder.query(&[("includeSeries", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_include_episode_file {
+    if let Some(ref param_value) = p_query_include_episode_file {
         req_builder = req_builder.query(&[("includeEpisodeFile", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_include_images {
+    if let Some(ref param_value) = p_query_include_images {
         req_builder = req_builder.query(&[("includeImages", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_monitored {
+    if let Some(ref param_value) = p_query_monitored {
         req_builder = req_builder.query(&[("monitored", &param_value.to_string())]);
     }
     if let Some(ref apikey) = configuration.api_key {
@@ -115,9 +115,9 @@ pub async fn get_wanted_cutoff(configuration: &configuration::Configuration, pag
 
 pub async fn get_wanted_cutoff_by_id(configuration: &configuration::Configuration, id: i32) -> Result<models::EpisodeResource, Error<GetWantedCutoffByIdError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_id = id;
+    let p_path_id = id;
 
-    let uri_str = format!("{}/api/v3/wanted/cutoff/{id}", configuration.base_path, id=p_id);
+    let uri_str = format!("{}/api/v3/wanted/cutoff/{id}", configuration.base_path, id=p_path_id);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
     if let Some(ref apikey) = configuration.api_key {

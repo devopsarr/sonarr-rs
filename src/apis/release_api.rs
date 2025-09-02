@@ -32,7 +32,7 @@ pub enum ListReleaseError {
 
 pub async fn create_release(configuration: &configuration::Configuration, release_resource: Option<models::ReleaseResource>) -> Result<(), Error<CreateReleaseError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_release_resource = release_resource;
+    let p_body_release_resource = release_resource;
 
     let uri_str = format!("{}/api/v3/release", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
@@ -56,7 +56,7 @@ pub async fn create_release(configuration: &configuration::Configuration, releas
         };
         req_builder = req_builder.header("X-Api-Key", value);
     };
-    req_builder = req_builder.json(&p_release_resource);
+    req_builder = req_builder.json(&p_body_release_resource);
 
     let req = req_builder.build()?;
     let resp = configuration.client.execute(req).await?;
@@ -74,20 +74,20 @@ pub async fn create_release(configuration: &configuration::Configuration, releas
 
 pub async fn list_release(configuration: &configuration::Configuration, series_id: Option<i32>, episode_id: Option<i32>, season_number: Option<i32>) -> Result<Vec<models::ReleaseResource>, Error<ListReleaseError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_series_id = series_id;
-    let p_episode_id = episode_id;
-    let p_season_number = season_number;
+    let p_query_series_id = series_id;
+    let p_query_episode_id = episode_id;
+    let p_query_season_number = season_number;
 
     let uri_str = format!("{}/api/v3/release", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
-    if let Some(ref param_value) = p_series_id {
+    if let Some(ref param_value) = p_query_series_id {
         req_builder = req_builder.query(&[("seriesId", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_episode_id {
+    if let Some(ref param_value) = p_query_episode_id {
         req_builder = req_builder.query(&[("episodeId", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_season_number {
+    if let Some(ref param_value) = p_query_season_number {
         req_builder = req_builder.query(&[("seasonNumber", &param_value.to_string())]);
     }
     if let Some(ref apikey) = configuration.api_key {

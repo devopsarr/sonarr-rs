@@ -67,7 +67,7 @@ pub enum UpdateImportListExclusionError {
 
 pub async fn create_import_list_exclusion(configuration: &configuration::Configuration, import_list_exclusion_resource: Option<models::ImportListExclusionResource>) -> Result<models::ImportListExclusionResource, Error<CreateImportListExclusionError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_import_list_exclusion_resource = import_list_exclusion_resource;
+    let p_body_import_list_exclusion_resource = import_list_exclusion_resource;
 
     let uri_str = format!("{}/api/v3/importlistexclusion", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
@@ -91,7 +91,7 @@ pub async fn create_import_list_exclusion(configuration: &configuration::Configu
         };
         req_builder = req_builder.header("X-Api-Key", value);
     };
-    req_builder = req_builder.json(&p_import_list_exclusion_resource);
+    req_builder = req_builder.json(&p_body_import_list_exclusion_resource);
 
     let req = req_builder.build()?;
     let resp = configuration.client.execute(req).await?;
@@ -120,9 +120,9 @@ pub async fn create_import_list_exclusion(configuration: &configuration::Configu
 
 pub async fn delete_import_list_exclusion(configuration: &configuration::Configuration, id: i32) -> Result<(), Error<DeleteImportListExclusionError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_id = id;
+    let p_path_id = id;
 
-    let uri_str = format!("{}/api/v3/importlistexclusion/{id}", configuration.base_path, id=p_id);
+    let uri_str = format!("{}/api/v3/importlistexclusion/{id}", configuration.base_path, id=p_path_id);
     let mut req_builder = configuration.client.request(reqwest::Method::DELETE, &uri_str);
 
     if let Some(ref apikey) = configuration.api_key {
@@ -161,7 +161,7 @@ pub async fn delete_import_list_exclusion(configuration: &configuration::Configu
 
 pub async fn delete_import_list_exclusion_bulk(configuration: &configuration::Configuration, import_list_exclusion_bulk_resource: Option<models::ImportListExclusionBulkResource>) -> Result<(), Error<DeleteImportListExclusionBulkError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_import_list_exclusion_bulk_resource = import_list_exclusion_bulk_resource;
+    let p_body_import_list_exclusion_bulk_resource = import_list_exclusion_bulk_resource;
 
     let uri_str = format!("{}/api/v3/importlistexclusion/bulk", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::DELETE, &uri_str);
@@ -185,7 +185,7 @@ pub async fn delete_import_list_exclusion_bulk(configuration: &configuration::Co
         };
         req_builder = req_builder.header("X-Api-Key", value);
     };
-    req_builder = req_builder.json(&p_import_list_exclusion_bulk_resource);
+    req_builder = req_builder.json(&p_body_import_list_exclusion_bulk_resource);
 
     let req = req_builder.build()?;
     let resp = configuration.client.execute(req).await?;
@@ -203,9 +203,9 @@ pub async fn delete_import_list_exclusion_bulk(configuration: &configuration::Co
 
 pub async fn get_import_list_exclusion_by_id(configuration: &configuration::Configuration, id: i32) -> Result<models::ImportListExclusionResource, Error<GetImportListExclusionByIdError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_id = id;
+    let p_path_id = id;
 
-    let uri_str = format!("{}/api/v3/importlistexclusion/{id}", configuration.base_path, id=p_id);
+    let uri_str = format!("{}/api/v3/importlistexclusion/{id}", configuration.base_path, id=p_path_id);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
     if let Some(ref apikey) = configuration.api_key {
@@ -255,24 +255,24 @@ pub async fn get_import_list_exclusion_by_id(configuration: &configuration::Conf
 
 pub async fn get_import_list_exclusion_paged(configuration: &configuration::Configuration, page: Option<i32>, page_size: Option<i32>, sort_key: Option<&str>, sort_direction: Option<models::SortDirection>) -> Result<models::ImportListExclusionResourcePagingResource, Error<GetImportListExclusionPagedError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_page = page;
-    let p_page_size = page_size;
-    let p_sort_key = sort_key;
-    let p_sort_direction = sort_direction;
+    let p_query_page = page;
+    let p_query_page_size = page_size;
+    let p_query_sort_key = sort_key;
+    let p_query_sort_direction = sort_direction;
 
     let uri_str = format!("{}/api/v3/importlistexclusion/paged", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
-    if let Some(ref param_value) = p_page {
+    if let Some(ref param_value) = p_query_page {
         req_builder = req_builder.query(&[("page", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_page_size {
+    if let Some(ref param_value) = p_query_page_size {
         req_builder = req_builder.query(&[("pageSize", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_sort_key {
+    if let Some(ref param_value) = p_query_sort_key {
         req_builder = req_builder.query(&[("sortKey", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_sort_direction {
+    if let Some(ref param_value) = p_query_sort_direction {
         req_builder = req_builder.query(&[("sortDirection", &param_value.to_string())]);
     }
     if let Some(ref apikey) = configuration.api_key {
@@ -372,10 +372,10 @@ pub async fn list_import_list_exclusion(configuration: &configuration::Configura
 
 pub async fn update_import_list_exclusion(configuration: &configuration::Configuration, id: &str, import_list_exclusion_resource: Option<models::ImportListExclusionResource>) -> Result<models::ImportListExclusionResource, Error<UpdateImportListExclusionError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_id = id;
-    let p_import_list_exclusion_resource = import_list_exclusion_resource;
+    let p_path_id = id;
+    let p_body_import_list_exclusion_resource = import_list_exclusion_resource;
 
-    let uri_str = format!("{}/api/v3/importlistexclusion/{id}", configuration.base_path, id=crate::apis::urlencode(p_id));
+    let uri_str = format!("{}/api/v3/importlistexclusion/{id}", configuration.base_path, id=crate::apis::urlencode(p_path_id));
     let mut req_builder = configuration.client.request(reqwest::Method::PUT, &uri_str);
 
     if let Some(ref apikey) = configuration.api_key {
@@ -397,7 +397,7 @@ pub async fn update_import_list_exclusion(configuration: &configuration::Configu
         };
         req_builder = req_builder.header("X-Api-Key", value);
     };
-    req_builder = req_builder.json(&p_import_list_exclusion_resource);
+    req_builder = req_builder.json(&p_body_import_list_exclusion_resource);
 
     let req = req_builder.build()?;
     let resp = configuration.client.execute(req).await?;

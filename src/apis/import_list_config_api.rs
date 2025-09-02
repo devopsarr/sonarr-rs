@@ -89,9 +89,9 @@ pub async fn get_import_list_config(configuration: &configuration::Configuration
 
 pub async fn get_import_list_config_by_id(configuration: &configuration::Configuration, id: i32) -> Result<models::ImportListConfigResource, Error<GetImportListConfigByIdError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_id = id;
+    let p_path_id = id;
 
-    let uri_str = format!("{}/api/v3/config/importlist/{id}", configuration.base_path, id=p_id);
+    let uri_str = format!("{}/api/v3/config/importlist/{id}", configuration.base_path, id=p_path_id);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
     if let Some(ref apikey) = configuration.api_key {
@@ -141,10 +141,10 @@ pub async fn get_import_list_config_by_id(configuration: &configuration::Configu
 
 pub async fn update_import_list_config(configuration: &configuration::Configuration, id: &str, import_list_config_resource: Option<models::ImportListConfigResource>) -> Result<models::ImportListConfigResource, Error<UpdateImportListConfigError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_id = id;
-    let p_import_list_config_resource = import_list_config_resource;
+    let p_path_id = id;
+    let p_body_import_list_config_resource = import_list_config_resource;
 
-    let uri_str = format!("{}/api/v3/config/importlist/{id}", configuration.base_path, id=crate::apis::urlencode(p_id));
+    let uri_str = format!("{}/api/v3/config/importlist/{id}", configuration.base_path, id=crate::apis::urlencode(p_path_id));
     let mut req_builder = configuration.client.request(reqwest::Method::PUT, &uri_str);
 
     if let Some(ref apikey) = configuration.api_key {
@@ -166,7 +166,7 @@ pub async fn update_import_list_config(configuration: &configuration::Configurat
         };
         req_builder = req_builder.header("X-Api-Key", value);
     };
-    req_builder = req_builder.json(&p_import_list_config_resource);
+    req_builder = req_builder.json(&p_body_import_list_config_resource);
 
     let req = req_builder.build()?;
     let resp = configuration.client.execute(req).await?;
