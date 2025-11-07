@@ -23,6 +23,7 @@ pub enum GetLanguageprofileSchemaError {
 }
 
 
+#[deprecated]
 pub async fn get_languageprofile_schema(configuration: &configuration::Configuration, ) -> Result<models::LanguageProfileResource, Error<GetLanguageprofileSchemaError>> {
 
     let uri_str = format!("{}/api/v3/languageprofile/schema", configuration.base_path);

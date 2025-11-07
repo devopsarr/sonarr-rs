@@ -51,6 +51,7 @@ pub enum UpdateLanguageProfileError {
 }
 
 
+#[deprecated]
 pub async fn create_language_profile(configuration: &configuration::Configuration, language_profile_resource: Option<models::LanguageProfileResource>) -> Result<models::LanguageProfileResource, Error<CreateLanguageProfileError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_body_language_profile_resource = language_profile_resource;
@@ -104,6 +105,7 @@ pub async fn create_language_profile(configuration: &configuration::Configuratio
     }
 }
 
+#[deprecated]
 pub async fn delete_language_profile(configuration: &configuration::Configuration, id: i32) -> Result<(), Error<DeleteLanguageProfileError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_path_id = id;
@@ -197,6 +199,7 @@ pub async fn get_language_profile_by_id(configuration: &configuration::Configura
     }
 }
 
+#[deprecated]
 pub async fn list_language_profile(configuration: &configuration::Configuration, ) -> Result<Vec<models::LanguageProfileResource>, Error<ListLanguageProfileError>> {
 
     let uri_str = format!("{}/api/v3/languageprofile", configuration.base_path);
@@ -247,6 +250,7 @@ pub async fn list_language_profile(configuration: &configuration::Configuration,
     }
 }
 
+#[deprecated]
 pub async fn update_language_profile(configuration: &configuration::Configuration, id: &str, language_profile_resource: Option<models::LanguageProfileResource>) -> Result<models::LanguageProfileResource, Error<UpdateLanguageProfileError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_path_id = id;
