@@ -320,6 +320,7 @@ pub async fn get_import_list_exclusion_paged(configuration: &configuration::Conf
     }
 }
 
+#[deprecated]
 pub async fn list_import_list_exclusion(configuration: &configuration::Configuration, ) -> Result<Vec<models::ImportListExclusionResource>, Error<ListImportListExclusionError>> {
 
     let uri_str = format!("{}/api/v3/importlistexclusion", configuration.base_path);
