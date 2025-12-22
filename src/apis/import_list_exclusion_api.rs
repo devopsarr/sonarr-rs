@@ -273,7 +273,7 @@ pub async fn get_import_list_exclusion_paged(configuration: &configuration::Conf
         req_builder = req_builder.query(&[("sortKey", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_query_sort_direction {
-        req_builder = req_builder.query(&[("sortDirection", &param_value.to_string())]);
+        req_builder = req_builder.query(&[("sortDirection", &serde_json::to_string(param_value)?)]);
     }
     if let Some(ref apikey) = configuration.api_key {
         let key = apikey.key.clone();
