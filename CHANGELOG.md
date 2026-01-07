@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.1.2](https://github.com/devopsarr/sonarr-rs/compare/v0.1.1...v0.1.2) (2026-01-07)
+
+
+### Bug Fixes
+
+* **deps:** update dependency sonarr/sonarr to v4.0.16.2944 ([125a4ae](https://github.com/devopsarr/sonarr-rs/commit/125a4ae856fa32054513cf7fe0efbcec8e0c3e6b))
+* **deps:** update openapitools/openapi-generator-cli docker tag to v7.17.0 ([836727f](https://github.com/devopsarr/sonarr-rs/commit/836727f8b6da642a44dd73b0d39140b1a8856ab2))
+* **deps:** update openapitools/openapi-generator-cli docker tag to v7.18.0 ([cfe732f](https://github.com/devopsarr/sonarr-rs/commit/cfe732f1fe48de1fd2d9d72d224f0a95f1861136))
+
 ## [0.1.1](https://github.com/devopsarr/sonarr-rs/compare/v0.1.0...v0.1.1) (2025-09-02)
 
 
