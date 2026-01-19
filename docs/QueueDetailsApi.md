@@ -19,7 +19,7 @@ Method | HTTP request | Description
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **series_id** | Option<**i32**> |  |  |
-**episode_ids** | Option<[**Vec<i32>**](i32.md)> |  |  |
+**episode_ids** | Option<[**Vec<i32>**](I32.md)> |  |  |
 **include_series** | Option<**bool**> |  |  |[default to false]
 **include_episode** | Option<**bool**> |  |  |[default to false]
 

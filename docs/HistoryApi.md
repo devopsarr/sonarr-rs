@@ -52,15 +52,15 @@ Name | Type | Description  | Required | Notes
 **page** | Option<**i32**> |  |  |[default to 1]
 **page_size** | Option<**i32**> |  |  |[default to 10]
 **sort_key** | Option<**String**> |  |  |
-**sort_direction** | Option<[**SortDirection**](.md)> |  |  |
+**sort_direction** | Option<[**SortDirection**](SortDirection.md)> |  |  |
 **include_series** | Option<**bool**> |  |  |
 **include_episode** | Option<**bool**> |  |  |
-**event_type** | Option<[**Vec<i32>**](i32.md)> |  |  |
+**event_type** | Option<[**Vec<i32>**](I32.md)> |  |  |
 **episode_id** | Option<**i32**> |  |  |
 **download_id** | Option<**String**> |  |  |
-**series_ids** | Option<[**Vec<i32>**](i32.md)> |  |  |
-**languages** | Option<[**Vec<i32>**](i32.md)> |  |  |
-**quality** | Option<[**Vec<i32>**](i32.md)> |  |  |
+**series_ids** | Option<[**Vec<i32>**](I32.md)> |  |  |
+**languages** | Option<[**Vec<i32>**](I32.md)> |  |  |
+**quality** | Option<[**Vec<i32>**](I32.md)> |  |  |
 
 ### Return type
 
@@ -90,7 +90,7 @@ Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **series_id** | Option<**i32**> |  |  |
 **season_number** | Option<**i32**> |  |  |
-**event_type** | Option<[**EpisodeHistoryEventType**](.md)> |  |  |
+**event_type** | Option<[**EpisodeHistoryEventType**](EpisodeHistoryEventType.md)> |  |  |
 **include_series** | Option<**bool**> |  |  |[default to false]
 **include_episode** | Option<**bool**> |  |  |[default to false]
 
@@ -121,7 +121,7 @@ Name | Type | Description  | Required | Notes
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **date** | Option<**String**> |  |  |
-**event_type** | Option<[**EpisodeHistoryEventType**](.md)> |  |  |
+**event_type** | Option<[**EpisodeHistoryEventType**](EpisodeHistoryEventType.md)> |  |  |
 **include_series** | Option<**bool**> |  |  |[default to false]
 **include_episode** | Option<**bool**> |  |  |[default to false]
 
