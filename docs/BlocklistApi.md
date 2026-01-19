@@ -79,9 +79,9 @@ Name | Type | Description  | Required | Notes
 **page** | Option<**i32**> |  |  |[default to 1]
 **page_size** | Option<**i32**> |  |  |[default to 10]
 **sort_key** | Option<**String**> |  |  |
-**sort_direction** | Option<[**SortDirection**](.md)> |  |  |
-**series_ids** | Option<[**Vec<i32>**](i32.md)> |  |  |
-**protocols** | Option<[**Vec<models::DownloadProtocol>**](models::DownloadProtocol.md)> |  |  |
+**sort_direction** | Option<[**SortDirection**](SortDirection.md)> |  |  |
+**series_ids** | Option<[**Vec<i32>**](I32.md)> |  |  |
+**protocols** | Option<[**Vec<models::DownloadProtocol>**](Models__DownloadProtocol.md)> |  |  |
 
 ### Return type
 

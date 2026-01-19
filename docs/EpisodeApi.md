@@ -51,7 +51,7 @@ Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **series_id** | Option<**i32**> |  |  |
 **season_number** | Option<**i32**> |  |  |
-**episode_ids** | Option<[**Vec<i32>**](i32.md)> |  |  |
+**episode_ids** | Option<[**Vec<i32>**](I32.md)> |  |  |
 **episode_file_id** | Option<**i32**> |  |  |
 **include_series** | Option<**bool**> |  |  |[default to false]
 **include_episode_file** | Option<**bool**> |  |  |[default to false]

@@ -113,7 +113,7 @@ pub async fn get_history(configuration: &configuration::Configuration, page: Opt
         req_builder = req_builder.query(&[("sortKey", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_query_sort_direction {
-        req_builder = req_builder.query(&[("sortDirection", &serde_json::to_string(param_value)?)]);
+        req_builder = req_builder.query(&[("sortDirection", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_query_include_series {
         req_builder = req_builder.query(&[("includeSeries", &param_value.to_string())]);
@@ -214,7 +214,7 @@ pub async fn list_history_series(configuration: &configuration::Configuration, s
         req_builder = req_builder.query(&[("seasonNumber", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_query_event_type {
-        req_builder = req_builder.query(&[("eventType", &serde_json::to_string(param_value)?)]);
+        req_builder = req_builder.query(&[("eventType", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_query_include_series {
         req_builder = req_builder.query(&[("includeSeries", &param_value.to_string())]);
@@ -281,7 +281,7 @@ pub async fn list_history_since(configuration: &configuration::Configuration, da
         req_builder = req_builder.query(&[("date", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_query_event_type {
-        req_builder = req_builder.query(&[("eventType", &serde_json::to_string(param_value)?)]);
+        req_builder = req_builder.query(&[("eventType", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_query_include_series {
         req_builder = req_builder.query(&[("includeSeries", &param_value.to_string())]);

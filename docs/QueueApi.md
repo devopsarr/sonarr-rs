@@ -87,15 +87,15 @@ Name | Type | Description  | Required | Notes
 **page** | Option<**i32**> |  |  |[default to 1]
 **page_size** | Option<**i32**> |  |  |[default to 10]
 **sort_key** | Option<**String**> |  |  |
-**sort_direction** | Option<[**SortDirection**](.md)> |  |  |
+**sort_direction** | Option<[**SortDirection**](SortDirection.md)> |  |  |
 **include_unknown_series_items** | Option<**bool**> |  |  |[default to false]
 **include_series** | Option<**bool**> |  |  |[default to false]
 **include_episode** | Option<**bool**> |  |  |[default to false]
-**series_ids** | Option<[**Vec<i32>**](i32.md)> |  |  |
-**protocol** | Option<[**DownloadProtocol**](.md)> |  |  |
-**languages** | Option<[**Vec<i32>**](i32.md)> |  |  |
-**quality** | Option<[**Vec<i32>**](i32.md)> |  |  |
-**status** | Option<[**Vec<models::QueueStatus>**](models::QueueStatus.md)> |  |  |
+**series_ids** | Option<[**Vec<i32>**](I32.md)> |  |  |
+**protocol** | Option<[**DownloadProtocol**](DownloadProtocol.md)> |  |  |
+**languages** | Option<[**Vec<i32>**](I32.md)> |  |  |
+**quality** | Option<[**Vec<i32>**](I32.md)> |  |  |
+**status** | Option<[**Vec<models::QueueStatus>**](Models__QueueStatus.md)> |  |  |
 
 ### Return type
 
