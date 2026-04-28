@@ -14,9 +14,9 @@ use serde::{Deserialize, Serialize};
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct SeasonStatisticsResource {
     #[serde(rename = "nextAiring", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub next_airing: Option<Option<String>>,
+    pub next_airing: Option<Option<chrono::DateTime<chrono::FixedOffset>>>,
     #[serde(rename = "previousAiring", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub previous_airing: Option<Option<String>>,
+    pub previous_airing: Option<Option<chrono::DateTime<chrono::FixedOffset>>>,
     #[serde(rename = "episodeFileCount", skip_serializing_if = "Option::is_none")]
     pub episode_file_count: Option<i32>,
     #[serde(rename = "episodeCount", skip_serializing_if = "Option::is_none")]

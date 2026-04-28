@@ -120,7 +120,7 @@ Name | Type | Description  | Required | Notes
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**date** | Option<**String**> |  |  |
+**date** | Option<**chrono::DateTime<chrono::FixedOffset>**> |  |  |
 **event_type** | Option<[**EpisodeHistoryEventType**](EpisodeHistoryEventType.md)> |  |  |
 **include_series** | Option<**bool**> |  |  |[default to false]
 **include_episode** | Option<**bool**> |  |  |[default to false]

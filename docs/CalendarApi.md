@@ -47,8 +47,8 @@ Name | Type | Description  | Required | Notes
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**start** | Option<**String**> |  |  |
-**end** | Option<**String**> |  |  |
+**start** | Option<**chrono::DateTime<chrono::FixedOffset>**> |  |  |
+**end** | Option<**chrono::DateTime<chrono::FixedOffset>**> |  |  |
 **unmonitored** | Option<**bool**> |  |  |[default to false]
 **include_series** | Option<**bool**> |  |  |[default to false]
 **include_episode_file** | Option<**bool**> |  |  |[default to false]
