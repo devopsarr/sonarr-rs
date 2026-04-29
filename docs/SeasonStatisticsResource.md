@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**next_airing** | Option<**String**> |  | [optional]
-**previous_airing** | Option<**String**> |  | [optional]
+**next_airing** | Option<**chrono::DateTime<chrono::FixedOffset>**> |  | [optional]
+**previous_airing** | Option<**chrono::DateTime<chrono::FixedOffset>**> |  | [optional]
 **episode_file_count** | Option<**i32**> |  | [optional]
 **episode_count** | Option<**i32**> |  | [optional]
 **total_episode_count** | Option<**i32**> |  | [optional]

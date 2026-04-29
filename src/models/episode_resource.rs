@@ -30,9 +30,9 @@ pub struct EpisodeResource {
     #[serde(rename = "airDate", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub air_date: Option<Option<String>>,
     #[serde(rename = "airDateUtc", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub air_date_utc: Option<Option<String>>,
+    pub air_date_utc: Option<Option<chrono::DateTime<chrono::FixedOffset>>>,
     #[serde(rename = "lastSearchTime", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub last_search_time: Option<Option<String>>,
+    pub last_search_time: Option<Option<chrono::DateTime<chrono::FixedOffset>>>,
     #[serde(rename = "runtime", skip_serializing_if = "Option::is_none")]
     pub runtime: Option<i32>,
     #[serde(rename = "finaleType", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
@@ -56,9 +56,9 @@ pub struct EpisodeResource {
     #[serde(rename = "unverifiedSceneNumbering", skip_serializing_if = "Option::is_none")]
     pub unverified_scene_numbering: Option<bool>,
     #[serde(rename = "endTime", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub end_time: Option<Option<String>>,
+    pub end_time: Option<Option<chrono::DateTime<chrono::FixedOffset>>>,
     #[serde(rename = "grabDate", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub grab_date: Option<Option<String>>,
+    pub grab_date: Option<Option<chrono::DateTime<chrono::FixedOffset>>>,
     #[serde(rename = "series", skip_serializing_if = "Option::is_none")]
     pub series: Option<Box<models::SeriesResource>>,
     #[serde(rename = "images", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]

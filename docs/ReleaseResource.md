@@ -39,7 +39,7 @@ Name | Type | Description | Notes
 **tv_rage_id** | Option<**i32**> |  | [optional]
 **imdb_id** | Option<**String**> |  | [optional]
 **rejections** | Option<**Vec<String>**> |  | [optional]
-**publish_date** | Option<**String**> |  | [optional]
+**publish_date** | Option<**chrono::DateTime<chrono::FixedOffset>**> |  | [optional]
 **comment_url** | Option<**String**> |  | [optional]
 **download_url** | Option<**String**> |  | [optional]
 **info_url** | Option<**String**> |  | [optional]

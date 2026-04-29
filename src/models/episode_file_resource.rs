@@ -26,7 +26,7 @@ pub struct EpisodeFileResource {
     #[serde(rename = "size", skip_serializing_if = "Option::is_none")]
     pub size: Option<i64>,
     #[serde(rename = "dateAdded", skip_serializing_if = "Option::is_none")]
-    pub date_added: Option<String>,
+    pub date_added: Option<chrono::DateTime<chrono::FixedOffset>>,
     #[serde(rename = "sceneName", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub scene_name: Option<Option<String>>,
     #[serde(rename = "releaseGroup", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]

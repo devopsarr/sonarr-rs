@@ -30,9 +30,9 @@ pub struct SeriesResource {
     #[serde(rename = "overview", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub overview: Option<Option<String>>,
     #[serde(rename = "nextAiring", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub next_airing: Option<Option<String>>,
+    pub next_airing: Option<Option<chrono::DateTime<chrono::FixedOffset>>>,
     #[serde(rename = "previousAiring", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub previous_airing: Option<Option<String>>,
+    pub previous_airing: Option<Option<chrono::DateTime<chrono::FixedOffset>>>,
     #[serde(rename = "network", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub network: Option<Option<String>>,
     #[serde(rename = "airTime", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
@@ -70,9 +70,9 @@ pub struct SeriesResource {
     #[serde(rename = "tmdbId", skip_serializing_if = "Option::is_none")]
     pub tmdb_id: Option<i32>,
     #[serde(rename = "firstAired", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub first_aired: Option<Option<String>>,
+    pub first_aired: Option<Option<chrono::DateTime<chrono::FixedOffset>>>,
     #[serde(rename = "lastAired", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub last_aired: Option<Option<String>>,
+    pub last_aired: Option<Option<chrono::DateTime<chrono::FixedOffset>>>,
     #[serde(rename = "seriesType", skip_serializing_if = "Option::is_none")]
     pub series_type: Option<models::SeriesTypes>,
     #[serde(rename = "cleanTitle", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
@@ -92,7 +92,7 @@ pub struct SeriesResource {
     #[serde(rename = "tags", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub tags: Option<Option<Vec<i32>>>,
     #[serde(rename = "added", skip_serializing_if = "Option::is_none")]
-    pub added: Option<String>,
+    pub added: Option<chrono::DateTime<chrono::FixedOffset>>,
     #[serde(rename = "addOptions", skip_serializing_if = "Option::is_none")]
     pub add_options: Option<Box<models::AddSeriesOptions>>,
     #[serde(rename = "ratings", skip_serializing_if = "Option::is_none")]

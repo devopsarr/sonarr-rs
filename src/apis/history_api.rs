@@ -267,7 +267,7 @@ pub async fn list_history_series(configuration: &configuration::Configuration, s
     }
 }
 
-pub async fn list_history_since(configuration: &configuration::Configuration, date: Option<String>, event_type: Option<models::EpisodeHistoryEventType>, include_series: Option<bool>, include_episode: Option<bool>) -> Result<Vec<models::HistoryResource>, Error<ListHistorySinceError>> {
+pub async fn list_history_since(configuration: &configuration::Configuration, date: Option<chrono::DateTime<chrono::FixedOffset>>, event_type: Option<models::EpisodeHistoryEventType>, include_series: Option<bool>, include_episode: Option<bool>) -> Result<Vec<models::HistoryResource>, Error<ListHistorySinceError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_query_date = date;
     let p_query_event_type = event_type;
